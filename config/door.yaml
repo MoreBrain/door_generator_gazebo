@@ -1,0 +1,15 @@
+# The joint state controller handles publishing transforms for any moving joints
+door:
+  joint_state_controller:
+    type: joint_state_controller/JointStateController
+    publish_rate: 50
+  # Position Controllers ---------------------------------------
+  joint1_effort_controller:
+    type: effort_controllers/JointEffortController
+    joint: door_joint
+    pid: {p: 100.0, i: 0.01, d: 10.0}
+  joint2_effort_controller:
+    type: effort_controllers/JointEffortController
+    joint: handle_joint
+    pid: {p: 100.0, i: 0.01, d: 10.0}
+
