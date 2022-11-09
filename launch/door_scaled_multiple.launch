@@ -1,0 +1,614 @@
+<?xml version="1.0"?>
+<launch>
+  
+  <include file="$(find gazebo_ros)/launch/empty_world.launch">
+    <arg name="world_name" value="$(find gazebo_ros)/worlds/empty.world"/>
+    <!--<arg name="world_name" value="$(find aws_robomaker_small_house_world)/worlds/small_house.world"/> -->
+    <!--<arg name="world_name" value="$(find lio_simulation)/worlds/office_1_simple.world"/> -->
+    <arg name="paused" value="false"/>
+    <arg name="use_sim_time" value="true"/>
+    <arg name="gui" value="true"/>
+    <arg name="headless" value="false"/>
+    <!--<arg name="debug" value="true"/> -->
+    <arg name="verbose" value="true" />
+  </include>
+
+  <node name="rviz" pkg="rviz" type="rviz" required="true" args="-d $(find lio_simulation)/config/door_scaled_config.rviz" />
+  <rosparam file="$(find lio_simulation)/config/door_scaled.yaml" command="load"/>
+
+  <!-- info from https://answers.ros.org/question/41433/multiple-robots-simulation-and-navigation/-->  
+  <group ns="door_scaled1"> 
+    <include file="$(find lio_simulation)/launch/one_door_scaled.launch" > 
+    <arg name="init_pose" value="-x 4 -y 0 -z 0" /> 
+    <arg name="robot_name"  value="door_scaled1" /> 
+    </include>
+  </group>  
+  <group ns="door_scaled2"> 
+    <include file="$(find lio_simulation)/launch/one_door_scaled.launch" > 
+    <arg name="init_pose" value="-x 8 -y 0 -z 0" /> 
+    <arg name="robot_name"  value="door_scaled2" /> 
+    </include>
+  </group>  
+  <group ns="door_scaled3"> 
+    <include file="$(find lio_simulation)/launch/one_door_scaled.launch" > 
+    <arg name="init_pose" value="-x 12 -y 0 -z 0" /> 
+    <arg name="robot_name"  value="door_scaled3" /> 
+    </include>
+  </group>  
+  <group ns="door_scaled4"> 
+    <include file="$(find lio_simulation)/launch/one_door_scaled.launch" > 
+    <arg name="init_pose" value="-x 16 -y 0 -z 0" /> 
+    <arg name="robot_name"  value="door_scaled4" /> 
+    </include>
+  </group>  
+  <group ns="door_scaled5"> 
+    <include file="$(find lio_simulation)/launch/one_door_scaled.launch" > 
+    <arg name="init_pose" value="-x 20 -y 0 -z 0" /> 
+    <arg name="robot_name"  value="door_scaled5" /> 
+    </include>
+  </group>  
+  <group ns="door_scaled6"> 
+    <include file="$(find lio_simulation)/launch/one_door_scaled.launch" > 
+    <arg name="init_pose" value="-x 24 -y 0 -z 0" /> 
+    <arg name="robot_name"  value="door_scaled6" /> 
+    </include>
+  </group>  
+  <group ns="door_scaled7"> 
+    <include file="$(find lio_simulation)/launch/one_door_scaled.launch" > 
+    <arg name="init_pose" value="-x 28 -y 0 -z 0" /> 
+    <arg name="robot_name"  value="door_scaled7" /> 
+    </include>
+  </group>  
+  <group ns="door_scaled8"> 
+    <include file="$(find lio_simulation)/launch/one_door_scaled.launch" > 
+    <arg name="init_pose" value="-x 32 -y 0 -z 0" /> 
+    <arg name="robot_name"  value="door_scaled8" /> 
+    </include>
+  </group>  
+  <group ns="door_scaled9"> 
+    <include file="$(find lio_simulation)/launch/one_door_scaled.launch" > 
+    <arg name="init_pose" value="-x 36 -y 0 -z 0" /> 
+    <arg name="robot_name"  value="door_scaled9" /> 
+    </include>
+  </group>  
+  <group ns="door_scaled10"> 
+    <include file="$(find lio_simulation)/launch/one_door_scaled.launch" > 
+    <arg name="init_pose" value="-x 40 -y 0 -z 0" /> 
+    <arg name="robot_name"  value="door_scaled10" /> 
+    </include>
+  </group>  
+  <group ns="door_scaled11"> 
+    <include file="$(find lio_simulation)/launch/one_door_scaled.launch" > 
+    <arg name="init_pose" value="-x 44 -y 0 -z 0" /> 
+    <arg name="robot_name"  value="door_scaled11" /> 
+    </include>
+  </group>  
+  <group ns="door_scaled12"> 
+    <include file="$(find lio_simulation)/launch/one_door_scaled.launch" > 
+    <arg name="init_pose" value="-x 48 -y 0 -z 0" /> 
+    <arg name="robot_name"  value="door_scaled12" /> 
+    </include>
+  </group>  
+  <group ns="door_scaled13"> 
+    <include file="$(find lio_simulation)/launch/one_door_scaled.launch" > 
+    <arg name="init_pose" value="-x 52 -y 0 -z 0" /> 
+    <arg name="robot_name"  value="door_scaled13" /> 
+    </include>
+  </group>  
+  <group ns="door_scaled14"> 
+    <include file="$(find lio_simulation)/launch/one_door_scaled.launch" > 
+    <arg name="init_pose" value="-x 56 -y 0 -z 0" /> 
+    <arg name="robot_name"  value="door_scaled14" /> 
+    </include>
+  </group>  
+  <group ns="door_scaled15"> 
+    <include file="$(find lio_simulation)/launch/one_door_scaled.launch" > 
+    <arg name="init_pose" value="-x 60 -y 0 -z 0" /> 
+    <arg name="robot_name"  value="door_scaled15" /> 
+    </include>
+  </group>  
+  <group ns="door_scaled16"> 
+    <include file="$(find lio_simulation)/launch/one_door_scaled.launch" > 
+    <arg name="init_pose" value="-x 64 -y 0 -z 0" /> 
+    <arg name="robot_name"  value="door_scaled16" /> 
+    </include>
+  </group>  
+  <group ns="door_scaled17"> 
+    <include file="$(find lio_simulation)/launch/one_door_scaled.launch" > 
+    <arg name="init_pose" value="-x 68 -y 0 -z 0" /> 
+    <arg name="robot_name"  value="door_scaled17" /> 
+    </include>
+  </group>  
+  <group ns="door_scaled18"> 
+    <include file="$(find lio_simulation)/launch/one_door_scaled.launch" > 
+    <arg name="init_pose" value="-x 72 -y 0 -z 0" /> 
+    <arg name="robot_name"  value="door_scaled18" /> 
+    </include>
+  </group>  
+  <group ns="door_scaled19"> 
+    <include file="$(find lio_simulation)/launch/one_door_scaled.launch" > 
+    <arg name="init_pose" value="-x 76 -y 0 -z 0" /> 
+    <arg name="robot_name"  value="door_scaled19" /> 
+    </include>
+  </group>  
+  <group ns="door_scaled20"> 
+    <include file="$(find lio_simulation)/launch/one_door_scaled.launch" > 
+    <arg name="init_pose" value="-x 80 -y 0 -z 0" /> 
+    <arg name="robot_name"  value="door_scaled20" /> 
+    </include>
+  </group>  
+  <group ns="door_scaled21"> 
+    <include file="$(find lio_simulation)/launch/one_door_scaled.launch" > 
+    <arg name="init_pose" value="-x 84 -y 0 -z 0" /> 
+    <arg name="robot_name"  value="door_scaled21" /> 
+    </include>
+  </group>  
+  <group ns="door_scaled22"> 
+    <include file="$(find lio_simulation)/launch/one_door_scaled.launch" > 
+    <arg name="init_pose" value="-x 88 -y 0 -z 0" /> 
+    <arg name="robot_name"  value="door_scaled22" /> 
+    </include>
+  </group>  
+  <group ns="door_scaled23"> 
+    <include file="$(find lio_simulation)/launch/one_door_scaled.launch" > 
+    <arg name="init_pose" value="-x 92 -y 0 -z 0" /> 
+    <arg name="robot_name"  value="door_scaled23" /> 
+    </include>
+  </group>  
+  <group ns="door_scaled24"> 
+    <include file="$(find lio_simulation)/launch/one_door_scaled.launch" > 
+    <arg name="init_pose" value="-x 96 -y 0 -z 0" /> 
+    <arg name="robot_name"  value="door_scaled24" /> 
+    </include>
+  </group>  
+  <group ns="door_scaled25"> 
+    <include file="$(find lio_simulation)/launch/one_door_scaled.launch" > 
+    <arg name="init_pose" value="-x 100 -y 0 -z 0" /> 
+    <arg name="robot_name"  value="door_scaled25" /> 
+    </include>
+  </group>  
+  <group ns="door_scaled26"> 
+    <include file="$(find lio_simulation)/launch/one_door_scaled.launch" > 
+    <arg name="init_pose" value="-x 104 -y 0 -z 0" /> 
+    <arg name="robot_name"  value="door_scaled26" /> 
+    </include>
+  </group>  
+  <group ns="door_scaled27"> 
+    <include file="$(find lio_simulation)/launch/one_door_scaled.launch" > 
+    <arg name="init_pose" value="-x 108 -y 0 -z 0" /> 
+    <arg name="robot_name"  value="door_scaled27" /> 
+    </include>
+  </group>  
+  <group ns="door_scaled28"> 
+    <include file="$(find lio_simulation)/launch/one_door_scaled.launch" > 
+    <arg name="init_pose" value="-x 112 -y 0 -z 0" /> 
+    <arg name="robot_name"  value="door_scaled28" /> 
+    </include>
+  </group>  
+  <group ns="door_scaled29"> 
+    <include file="$(find lio_simulation)/launch/one_door_scaled.launch" > 
+    <arg name="init_pose" value="-x 116 -y 0 -z 0" /> 
+    <arg name="robot_name"  value="door_scaled29" /> 
+    </include>
+  </group>  
+  <group ns="door_scaled30"> 
+    <include file="$(find lio_simulation)/launch/one_door_scaled.launch" > 
+    <arg name="init_pose" value="-x 120 -y 0 -z 0" /> 
+    <arg name="robot_name"  value="door_scaled30" /> 
+    </include>
+  </group>  
+  <group ns="door_scaled31"> 
+    <include file="$(find lio_simulation)/launch/one_door_scaled.launch" > 
+    <arg name="init_pose" value="-x 124 -y 0 -z 0" /> 
+    <arg name="robot_name"  value="door_scaled31" /> 
+    </include>
+  </group>  
+  <group ns="door_scaled32"> 
+    <include file="$(find lio_simulation)/launch/one_door_scaled.launch" > 
+    <arg name="init_pose" value="-x 128 -y 0 -z 0" /> 
+    <arg name="robot_name"  value="door_scaled32" /> 
+    </include>
+  </group>  
+  <group ns="door_scaled33"> 
+    <include file="$(find lio_simulation)/launch/one_door_scaled.launch" > 
+    <arg name="init_pose" value="-x 132 -y 0 -z 0" /> 
+    <arg name="robot_name"  value="door_scaled33" /> 
+    </include>
+  </group>  
+  <group ns="door_scaled34"> 
+    <include file="$(find lio_simulation)/launch/one_door_scaled.launch" > 
+    <arg name="init_pose" value="-x 136 -y 0 -z 0" /> 
+    <arg name="robot_name"  value="door_scaled34" /> 
+    </include>
+  </group>  
+  <group ns="door_scaled35"> 
+    <include file="$(find lio_simulation)/launch/one_door_scaled.launch" > 
+    <arg name="init_pose" value="-x 140 -y 0 -z 0" /> 
+    <arg name="robot_name"  value="door_scaled35" /> 
+    </include>
+  </group>  
+  <group ns="door_scaled36"> 
+    <include file="$(find lio_simulation)/launch/one_door_scaled.launch" > 
+    <arg name="init_pose" value="-x 144 -y 0 -z 0" /> 
+    <arg name="robot_name"  value="door_scaled36" /> 
+    </include>
+  </group>  
+  <group ns="door_scaled37"> 
+    <include file="$(find lio_simulation)/launch/one_door_scaled.launch" > 
+    <arg name="init_pose" value="-x 148 -y 0 -z 0" /> 
+    <arg name="robot_name"  value="door_scaled37" /> 
+    </include>
+  </group>  
+  <group ns="door_scaled38"> 
+    <include file="$(find lio_simulation)/launch/one_door_scaled.launch" > 
+    <arg name="init_pose" value="-x 152 -y 0 -z 0" /> 
+    <arg name="robot_name"  value="door_scaled38" /> 
+    </include>
+  </group>  
+  <group ns="door_scaled39"> 
+    <include file="$(find lio_simulation)/launch/one_door_scaled.launch" > 
+    <arg name="init_pose" value="-x 156 -y 0 -z 0" /> 
+    <arg name="robot_name"  value="door_scaled39" /> 
+    </include>
+  </group>  
+  <group ns="door_scaled40"> 
+    <include file="$(find lio_simulation)/launch/one_door_scaled.launch" > 
+    <arg name="init_pose" value="-x 160 -y 0 -z 0" /> 
+    <arg name="robot_name"  value="door_scaled40" /> 
+    </include>
+  </group>  
+  <group ns="door_scaled41"> 
+    <include file="$(find lio_simulation)/launch/one_door_scaled.launch" > 
+    <arg name="init_pose" value="-x 164 -y 0 -z 0" /> 
+    <arg name="robot_name"  value="door_scaled41" /> 
+    </include>
+  </group>  
+  <group ns="door_scaled42"> 
+    <include file="$(find lio_simulation)/launch/one_door_scaled.launch" > 
+    <arg name="init_pose" value="-x 168 -y 0 -z 0" /> 
+    <arg name="robot_name"  value="door_scaled42" /> 
+    </include>
+  </group>  
+  <group ns="door_scaled43"> 
+    <include file="$(find lio_simulation)/launch/one_door_scaled.launch" > 
+    <arg name="init_pose" value="-x 172 -y 0 -z 0" /> 
+    <arg name="robot_name"  value="door_scaled43" /> 
+    </include>
+  </group>  
+  <group ns="door_scaled44"> 
+    <include file="$(find lio_simulation)/launch/one_door_scaled.launch" > 
+    <arg name="init_pose" value="-x 176 -y 0 -z 0" /> 
+    <arg name="robot_name"  value="door_scaled44" /> 
+    </include>
+  </group>  
+  <group ns="door_scaled45"> 
+    <include file="$(find lio_simulation)/launch/one_door_scaled.launch" > 
+    <arg name="init_pose" value="-x 180 -y 0 -z 0" /> 
+    <arg name="robot_name"  value="door_scaled45" /> 
+    </include>
+  </group>  
+  <group ns="door_scaled46"> 
+    <include file="$(find lio_simulation)/launch/one_door_scaled.launch" > 
+    <arg name="init_pose" value="-x 184 -y 0 -z 0" /> 
+    <arg name="robot_name"  value="door_scaled46" /> 
+    </include>
+  </group>  
+  <group ns="door_scaled47"> 
+    <include file="$(find lio_simulation)/launch/one_door_scaled.launch" > 
+    <arg name="init_pose" value="-x 188 -y 0 -z 0" /> 
+    <arg name="robot_name"  value="door_scaled47" /> 
+    </include>
+  </group>  
+  <group ns="door_scaled48"> 
+    <include file="$(find lio_simulation)/launch/one_door_scaled.launch" > 
+    <arg name="init_pose" value="-x 192 -y 0 -z 0" /> 
+    <arg name="robot_name"  value="door_scaled48" /> 
+    </include>
+  </group>  
+  <group ns="door_scaled49"> 
+    <include file="$(find lio_simulation)/launch/one_door_scaled.launch" > 
+    <arg name="init_pose" value="-x 196 -y 0 -z 0" /> 
+    <arg name="robot_name"  value="door_scaled49" /> 
+    </include>
+  </group>  
+  <group ns="door_scaled50"> 
+    <include file="$(find lio_simulation)/launch/one_door_scaled.launch" > 
+    <arg name="init_pose" value="-x 200 -y 0 -z 0" /> 
+    <arg name="robot_name"  value="door_scaled50" /> 
+    </include>
+  </group>  
+  <group ns="door_scaled51"> 
+    <include file="$(find lio_simulation)/launch/one_door_scaled.launch" > 
+    <arg name="init_pose" value="-x 204 -y 0 -z 0" /> 
+    <arg name="robot_name"  value="door_scaled51" /> 
+    </include>
+  </group>  
+  <group ns="door_scaled52"> 
+    <include file="$(find lio_simulation)/launch/one_door_scaled.launch" > 
+    <arg name="init_pose" value="-x 208 -y 0 -z 0" /> 
+    <arg name="robot_name"  value="door_scaled52" /> 
+    </include>
+  </group>  
+  <group ns="door_scaled53"> 
+    <include file="$(find lio_simulation)/launch/one_door_scaled.launch" > 
+    <arg name="init_pose" value="-x 212 -y 0 -z 0" /> 
+    <arg name="robot_name"  value="door_scaled53" /> 
+    </include>
+  </group>  
+  <group ns="door_scaled54"> 
+    <include file="$(find lio_simulation)/launch/one_door_scaled.launch" > 
+    <arg name="init_pose" value="-x 216 -y 0 -z 0" /> 
+    <arg name="robot_name"  value="door_scaled54" /> 
+    </include>
+  </group>  
+  <group ns="door_scaled55"> 
+    <include file="$(find lio_simulation)/launch/one_door_scaled.launch" > 
+    <arg name="init_pose" value="-x 220 -y 0 -z 0" /> 
+    <arg name="robot_name"  value="door_scaled55" /> 
+    </include>
+  </group>  
+  <group ns="door_scaled56"> 
+    <include file="$(find lio_simulation)/launch/one_door_scaled.launch" > 
+    <arg name="init_pose" value="-x 224 -y 0 -z 0" /> 
+    <arg name="robot_name"  value="door_scaled56" /> 
+    </include>
+  </group>  
+  <group ns="door_scaled57"> 
+    <include file="$(find lio_simulation)/launch/one_door_scaled.launch" > 
+    <arg name="init_pose" value="-x 228 -y 0 -z 0" /> 
+    <arg name="robot_name"  value="door_scaled57" /> 
+    </include>
+  </group>  
+  <group ns="door_scaled58"> 
+    <include file="$(find lio_simulation)/launch/one_door_scaled.launch" > 
+    <arg name="init_pose" value="-x 232 -y 0 -z 0" /> 
+    <arg name="robot_name"  value="door_scaled58" /> 
+    </include>
+  </group>  
+  <group ns="door_scaled59"> 
+    <include file="$(find lio_simulation)/launch/one_door_scaled.launch" > 
+    <arg name="init_pose" value="-x 236 -y 0 -z 0" /> 
+    <arg name="robot_name"  value="door_scaled59" /> 
+    </include>
+  </group>  
+  <group ns="door_scaled60"> 
+    <include file="$(find lio_simulation)/launch/one_door_scaled.launch" > 
+    <arg name="init_pose" value="-x 240 -y 0 -z 0" /> 
+    <arg name="robot_name"  value="door_scaled60" /> 
+    </include>
+  </group>  
+  <group ns="door_scaled61"> 
+    <include file="$(find lio_simulation)/launch/one_door_scaled.launch" > 
+    <arg name="init_pose" value="-x 244 -y 0 -z 0" /> 
+    <arg name="robot_name"  value="door_scaled61" /> 
+    </include>
+  </group>  
+  <group ns="door_scaled62"> 
+    <include file="$(find lio_simulation)/launch/one_door_scaled.launch" > 
+    <arg name="init_pose" value="-x 248 -y 0 -z 0" /> 
+    <arg name="robot_name"  value="door_scaled62" /> 
+    </include>
+  </group>  
+  <group ns="door_scaled63"> 
+    <include file="$(find lio_simulation)/launch/one_door_scaled.launch" > 
+    <arg name="init_pose" value="-x 252 -y 0 -z 0" /> 
+    <arg name="robot_name"  value="door_scaled63" /> 
+    </include>
+  </group>  
+  <group ns="door_scaled64"> 
+    <include file="$(find lio_simulation)/launch/one_door_scaled.launch" > 
+    <arg name="init_pose" value="-x 256 -y 0 -z 0" /> 
+    <arg name="robot_name"  value="door_scaled64" /> 
+    </include>
+  </group>  
+  <group ns="door_scaled65"> 
+    <include file="$(find lio_simulation)/launch/one_door_scaled.launch" > 
+    <arg name="init_pose" value="-x 260 -y 0 -z 0" /> 
+    <arg name="robot_name"  value="door_scaled65" /> 
+    </include>
+  </group>  
+  <group ns="door_scaled66"> 
+    <include file="$(find lio_simulation)/launch/one_door_scaled.launch" > 
+    <arg name="init_pose" value="-x 264 -y 0 -z 0" /> 
+    <arg name="robot_name"  value="door_scaled66" /> 
+    </include>
+  </group>  
+  <group ns="door_scaled67"> 
+    <include file="$(find lio_simulation)/launch/one_door_scaled.launch" > 
+    <arg name="init_pose" value="-x 268 -y 0 -z 0" /> 
+    <arg name="robot_name"  value="door_scaled67" /> 
+    </include>
+  </group>  
+  <group ns="door_scaled68"> 
+    <include file="$(find lio_simulation)/launch/one_door_scaled.launch" > 
+    <arg name="init_pose" value="-x 272 -y 0 -z 0" /> 
+    <arg name="robot_name"  value="door_scaled68" /> 
+    </include>
+  </group>  
+  <group ns="door_scaled69"> 
+    <include file="$(find lio_simulation)/launch/one_door_scaled.launch" > 
+    <arg name="init_pose" value="-x 276 -y 0 -z 0" /> 
+    <arg name="robot_name"  value="door_scaled69" /> 
+    </include>
+  </group>  
+  <group ns="door_scaled70"> 
+    <include file="$(find lio_simulation)/launch/one_door_scaled.launch" > 
+    <arg name="init_pose" value="-x 280 -y 0 -z 0" /> 
+    <arg name="robot_name"  value="door_scaled70" /> 
+    </include>
+  </group>  
+  <group ns="door_scaled71"> 
+    <include file="$(find lio_simulation)/launch/one_door_scaled.launch" > 
+    <arg name="init_pose" value="-x 284 -y 0 -z 0" /> 
+    <arg name="robot_name"  value="door_scaled71" /> 
+    </include>
+  </group>  
+  <group ns="door_scaled72"> 
+    <include file="$(find lio_simulation)/launch/one_door_scaled.launch" > 
+    <arg name="init_pose" value="-x 288 -y 0 -z 0" /> 
+    <arg name="robot_name"  value="door_scaled72" /> 
+    </include>
+  </group>  
+  <group ns="door_scaled73"> 
+    <include file="$(find lio_simulation)/launch/one_door_scaled.launch" > 
+    <arg name="init_pose" value="-x 292 -y 0 -z 0" /> 
+    <arg name="robot_name"  value="door_scaled73" /> 
+    </include>
+  </group>  
+  <group ns="door_scaled74"> 
+    <include file="$(find lio_simulation)/launch/one_door_scaled.launch" > 
+    <arg name="init_pose" value="-x 296 -y 0 -z 0" /> 
+    <arg name="robot_name"  value="door_scaled74" /> 
+    </include>
+  </group>  
+  <group ns="door_scaled75"> 
+    <include file="$(find lio_simulation)/launch/one_door_scaled.launch" > 
+    <arg name="init_pose" value="-x 300 -y 0 -z 0" /> 
+    <arg name="robot_name"  value="door_scaled75" /> 
+    </include>
+  </group>  
+  <group ns="door_scaled76"> 
+    <include file="$(find lio_simulation)/launch/one_door_scaled.launch" > 
+    <arg name="init_pose" value="-x 304 -y 0 -z 0" /> 
+    <arg name="robot_name"  value="door_scaled76" /> 
+    </include>
+  </group>  
+  <group ns="door_scaled77"> 
+    <include file="$(find lio_simulation)/launch/one_door_scaled.launch" > 
+    <arg name="init_pose" value="-x 308 -y 0 -z 0" /> 
+    <arg name="robot_name"  value="door_scaled77" /> 
+    </include>
+  </group>  
+  <group ns="door_scaled78"> 
+    <include file="$(find lio_simulation)/launch/one_door_scaled.launch" > 
+    <arg name="init_pose" value="-x 312 -y 0 -z 0" /> 
+    <arg name="robot_name"  value="door_scaled78" /> 
+    </include>
+  </group>  
+  <group ns="door_scaled79"> 
+    <include file="$(find lio_simulation)/launch/one_door_scaled.launch" > 
+    <arg name="init_pose" value="-x 316 -y 0 -z 0" /> 
+    <arg name="robot_name"  value="door_scaled79" /> 
+    </include>
+  </group>  
+  <group ns="door_scaled80"> 
+    <include file="$(find lio_simulation)/launch/one_door_scaled.launch" > 
+    <arg name="init_pose" value="-x 320 -y 0 -z 0" /> 
+    <arg name="robot_name"  value="door_scaled80" /> 
+    </include>
+  </group>  
+  <group ns="door_scaled81"> 
+    <include file="$(find lio_simulation)/launch/one_door_scaled.launch" > 
+    <arg name="init_pose" value="-x 324 -y 0 -z 0" /> 
+    <arg name="robot_name"  value="door_scaled81" /> 
+    </include>
+  </group>  
+  <group ns="door_scaled82"> 
+    <include file="$(find lio_simulation)/launch/one_door_scaled.launch" > 
+    <arg name="init_pose" value="-x 328 -y 0 -z 0" /> 
+    <arg name="robot_name"  value="door_scaled82" /> 
+    </include>
+  </group>  
+  <group ns="door_scaled83"> 
+    <include file="$(find lio_simulation)/launch/one_door_scaled.launch" > 
+    <arg name="init_pose" value="-x 332 -y 0 -z 0" /> 
+    <arg name="robot_name"  value="door_scaled83" /> 
+    </include>
+  </group>  
+  <group ns="door_scaled84"> 
+    <include file="$(find lio_simulation)/launch/one_door_scaled.launch" > 
+    <arg name="init_pose" value="-x 336 -y 0 -z 0" /> 
+    <arg name="robot_name"  value="door_scaled84" /> 
+    </include>
+  </group>  
+  <group ns="door_scaled85"> 
+    <include file="$(find lio_simulation)/launch/one_door_scaled.launch" > 
+    <arg name="init_pose" value="-x 340 -y 0 -z 0" /> 
+    <arg name="robot_name"  value="door_scaled85" /> 
+    </include>
+  </group>  
+  <group ns="door_scaled86"> 
+    <include file="$(find lio_simulation)/launch/one_door_scaled.launch" > 
+    <arg name="init_pose" value="-x 344 -y 0 -z 0" /> 
+    <arg name="robot_name"  value="door_scaled86" /> 
+    </include>
+  </group>  
+  <group ns="door_scaled87"> 
+    <include file="$(find lio_simulation)/launch/one_door_scaled.launch" > 
+    <arg name="init_pose" value="-x 348 -y 0 -z 0" /> 
+    <arg name="robot_name"  value="door_scaled87" /> 
+    </include>
+  </group>  
+  <group ns="door_scaled88"> 
+    <include file="$(find lio_simulation)/launch/one_door_scaled.launch" > 
+    <arg name="init_pose" value="-x 352 -y 0 -z 0" /> 
+    <arg name="robot_name"  value="door_scaled88" /> 
+    </include>
+  </group>  
+  <group ns="door_scaled89"> 
+    <include file="$(find lio_simulation)/launch/one_door_scaled.launch" > 
+    <arg name="init_pose" value="-x 356 -y 0 -z 0" /> 
+    <arg name="robot_name"  value="door_scaled89" /> 
+    </include>
+  </group>  
+  <group ns="door_scaled90"> 
+    <include file="$(find lio_simulation)/launch/one_door_scaled.launch" > 
+    <arg name="init_pose" value="-x 360 -y 0 -z 0" /> 
+    <arg name="robot_name"  value="door_scaled90" /> 
+    </include>
+  </group>  
+  <group ns="door_scaled91"> 
+    <include file="$(find lio_simulation)/launch/one_door_scaled.launch" > 
+    <arg name="init_pose" value="-x 364 -y 0 -z 0" /> 
+    <arg name="robot_name"  value="door_scaled91" /> 
+    </include>
+  </group>  
+  <group ns="door_scaled92"> 
+    <include file="$(find lio_simulation)/launch/one_door_scaled.launch" > 
+    <arg name="init_pose" value="-x 368 -y 0 -z 0" /> 
+    <arg name="robot_name"  value="door_scaled92" /> 
+    </include>
+  </group>  
+  <group ns="door_scaled93"> 
+    <include file="$(find lio_simulation)/launch/one_door_scaled.launch" > 
+    <arg name="init_pose" value="-x 372 -y 0 -z 0" /> 
+    <arg name="robot_name"  value="door_scaled93" /> 
+    </include>
+  </group>  
+  <group ns="door_scaled94"> 
+    <include file="$(find lio_simulation)/launch/one_door_scaled.launch" > 
+    <arg name="init_pose" value="-x 376 -y 0 -z 0" /> 
+    <arg name="robot_name"  value="door_scaled94" /> 
+    </include>
+  </group>  
+  <group ns="door_scaled95"> 
+    <include file="$(find lio_simulation)/launch/one_door_scaled.launch" > 
+    <arg name="init_pose" value="-x 380 -y 0 -z 0" /> 
+    <arg name="robot_name"  value="door_scaled95" /> 
+    </include>
+  </group>  
+  <group ns="door_scaled96"> 
+    <include file="$(find lio_simulation)/launch/one_door_scaled.launch" > 
+    <arg name="init_pose" value="-x 384 -y 0 -z 0" /> 
+    <arg name="robot_name"  value="door_scaled96" /> 
+    </include>
+  </group>  
+  <group ns="door_scaled97"> 
+    <include file="$(find lio_simulation)/launch/one_door_scaled.launch" > 
+    <arg name="init_pose" value="-x 388 -y 0 -z 0" /> 
+    <arg name="robot_name"  value="door_scaled97" /> 
+    </include>
+  </group>  
+  <group ns="door_scaled98"> 
+    <include file="$(find lio_simulation)/launch/one_door_scaled.launch" > 
+    <arg name="init_pose" value="-x 392 -y 0 -z 0" /> 
+    <arg name="robot_name"  value="door_scaled98" /> 
+    </include>
+  </group>  
+  <group ns="door_scaled99"> 
+    <include file="$(find lio_simulation)/launch/one_door_scaled.launch" > 
+    <arg name="init_pose" value="-x 396 -y 0 -z 0" /> 
+    <arg name="robot_name"  value="door_scaled99" /> 
+    </include>
+  </group>
+</launch>

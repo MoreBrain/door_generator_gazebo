@@ -1,0 +1,260 @@
+<?xml version="1.0"?>
+<robot name="door_scaled1" xmlns:xacro="http://ros.org/wiki/xacro">
+
+  <xacro:property name="M_PI"  value="3.1415926535897931"/>
+  <xacro:property name="door_width"  value="0.9883052003432655"/>
+  <xacro:property name="door_thickness"  value="0.05941797005126053"/>
+  <xacro:property name="door_direction"  value="forward"/>
+  <xacro:property name="door_max_angle"  value="1.9552259349831846"/>
+  <xacro:property name="flip_door"  value="0"/>
+  <xacro:property name="handle_dist_to_edge" value="0.211518580903298"/>
+  <xacro:property name="handle_height"  value="0.7242168339107209"/>
+  <xacro:property name="handle_length"  value="0.1637143592839922"/>
+  <xacro:property name="handle_dist_to_door"  value="0.07971382902786694"/>
+  <xacro:property name="handle_max_angle"  value="0"/> <!-- ${M_PI/4} -->
+  <xacro:property name="wall1_length"  value="4.0"/>
+  <xacro:property name="wall1_thickness"  value="0.2808835123289015"/>
+  <xacro:property name="colour_door" value="White"/>
+  <xacro:property name="colour_handle" value="Grey"/>
+  <xacro:property name="aruco_no" value="aruco_2"/>
+
+  <xacro:if value="${door_direction == 'forward'}">
+    <xacro:property name = "door_angle_upper" value = "${door_max_angle}" />
+    <xacro:property name = "door_angle_lower" value = "0" />
+  </xacro:if>
+  <xacro:if value="${door_direction == 'backward'}">
+    <xacro:property name = "door_angle_upper" value = "0" /> 
+    <xacro:property name = "door_angle_lower" value = "${-door_max_angle}" /> 
+  </xacro:if>
+
+<xacro:macro name="joint_element" params="name parent child x y z r p ya type x_ax y_ax z_ax limit_low limit_up damping friction effort velocity">
+    <joint name="${name}_joint" type="${type}">
+        <parent link="${parent}"/>
+        <child link="${child}"/>
+        <origin xyz="${x} ${y} ${z}" rpy="${r} ${p} ${ya}"/>
+        <axis xyz="${x_ax} ${y_ax} ${z_ax}"/>
+        <limit effort="${effort}" velocity="${velocity}" lower="${limit_low}" upper="${limit_up}"/>
+        <dynamics damping="${damping}" friction="${friction}"/>
+    </joint>
+</xacro:macro>
+
+<xacro:macro name="link_element_box" params="name x y z r p ya mass x_s y_s z_s ixx iyy izz mu1 mu2 material selfCollide gravityOff">
+  <link name="${name}_link">
+    <inertial>
+      <mass value="${mass}" />
+      <origin xyz="${x} ${y} ${z}" rpy="${r} ${p} ${ya}"/>
+      <inertia ixx="${ixx}" ixy="0"  ixz="0"
+               iyy="${iyy}" iyz="0"
+               izz="${izz}" />
+    </inertial>
+    <visual>
+      <origin xyz="${x} ${y} ${z}" rpy="${r} ${p} ${ya}" />
+      <geometry name="${name}_visual_geom">
+        <box size="${x_s} ${y_s} ${z_s}" />
+      </geometry>
+    </visual> 
+    <collision>
+      <origin xyz="${x} ${y} ${z}" rpy="${r} ${p} ${ya}" />
+      <geometry name="${name}_collision_geom">
+        <box size="${x_s} ${y_s} ${z_s}" />
+      </geometry>
+    </collision>
+  </link>
+  <gazebo reference="${name}_link">
+    <mu1>${mu1}</mu1>
+    <mu2>${mu2}</mu2>
+    <selfCollide>${selfCollide}</selfCollide>
+    <turnGravityOff>${gravityOff}</turnGravityOff>
+    <material>${material}</material>
+    <!-- alternatively to material -> use visual element for detailed colours -->
+    <!--<visual>  
+      <material>  
+        <ambient>1 0.5088 0.0468 1</ambient>  
+        <diffuse>0.46 0.46 0.46 1.0</diffuse>  
+        <specular>0.5 0.5 0.5 128</specular>  
+        <emissive>0.46 0.46 0.46 1.0</emissive>  
+      </material>  
+    </visual>-->
+  </gazebo>
+</xacro:macro>
+
+<xacro:macro name="link_element_cylinder" params="name x y z r p ya mass radius length ixx iyy izz mu1 mu2 material selfCollide gravityOff">
+  <link name="${name}_link">
+    <inertial>
+      <mass value="${mass}" />
+      <origin xyz="${x} ${y} ${z}" rpy="${r} ${p} ${ya}"/>
+      <inertia ixx="${ixx}" ixy="0"  ixz="0"
+               iyy="${iyy}" iyz="0"
+               izz="${izz}" />
+    </inertial>
+    <visual>
+      <origin xyz="${x} ${y} ${z}" rpy="${r} ${p} ${ya}" />
+      <geometry name="${name}_visual_geom">
+        <cylinder radius="${radius}" length="${length}" />
+      </geometry>
+    </visual> 
+    <collision>
+      <origin xyz="${x} ${y} ${z}" rpy="${r} ${p} ${ya}" />
+      <geometry name="${name}_collision_geom">
+        <cylinder radius="${radius}" length="${length}" />
+      </geometry>
+    </collision>
+  </link>
+  <gazebo reference="${name}_link">
+    <mu1>${mu1}</mu1>
+    <mu2>${mu2}</mu2>
+    <selfCollide>${selfCollide}</selfCollide>
+    <turnGravityOff>${gravityOff}</turnGravityOff>
+    <material>${material}</material>
+    <!-- alternatively to material -> use visual element for detailed colours -->
+    <!--<visual>  
+      <material>  
+        <ambient>1 0.5088 0.0468 1</ambient>  
+        <diffuse>0.46 0.46 0.46 1.0</diffuse>  
+        <specular>0.5 0.5 0.5 128</specular>  
+        <emissive>0.46 0.46 0.46 1.0</emissive>  
+      </material>  
+    </visual>-->
+  </gazebo>
+</xacro:macro>
+
+
+<link name="world"/>
+
+<xacro:joint_element name="world_fixed" parent="world" child="wall1_link" 
+  x="0" y="0" z="0.0" r="0" p="0" ya="${flip_door * M_PI}" 
+  type="fixed" x_ax="0" y_ax="0" z_ax="0" limit_low="0" limit_up="0"
+  damping="0" friction="0" effort="0" velocity="0">
+</xacro:joint_element>
+
+<xacro:link_element_box name="wall1" x="0" y="${wall1_length/2}" z="1" r="0" p="0" ya="0" 
+  mass="100" x_s="${wall1_thickness}" y_s="${wall1_length}" z_s="2" ixx="10" iyy="10" izz="10"
+  mu1="1000" mu2="1000" material="Gazebo/White" selfCollide="false" gravityOff="false">
+</xacro:link_element_box>
+
+<xacro:joint_element name="wall1_wall2" parent="wall1_link" child="wall2_link" 
+  x="0" y="${-(door_width + 0.01)}" z="0.0" r="0" p="0" ya="0" 
+  type="fixed" x_ax="0" y_ax="0" z_ax="0" limit_low="0" limit_up="0"
+  damping="0" friction="0" effort="0" velocity="0">
+</xacro:joint_element>
+
+<xacro:link_element_box name="wall2" x="0" y="${-wall1_length/2}" z="1" r="0" p="0" ya="0" 
+  mass="100" x_s="${wall1_thickness}" y_s="${wall1_length}" z_s="2" ixx="10" iyy="10" izz="10"
+  mu1="1000" mu2="1000" material="Gazebo/White" selfCollide="false" gravityOff="false">
+</xacro:link_element_box>
+ 
+<xacro:joint_element name="door" parent="wall1_link" child="door_link" 
+  x="0" y="0" z="0" r="0" p="0" ya="0" 
+  type="revolute" x_ax="0" y_ax="0" z_ax="1" limit_low="${door_angle_lower}" limit_up="${door_angle_upper}"
+  damping="0.1" friction="0.1" effort="10000000" velocity="10">
+</xacro:joint_element> 
+
+<xacro:link_element_box name="door" x="0" y="${-door_width/2}" z="1.05" r="0" p="0" ya="${M_PI}" 
+  mass="30" x_s="${door_thickness}" y_s="${door_width}" z_s="2.0" ixx="1.0" iyy="1.0" izz="3.0"
+  mu1="1000" mu2="1000" material="Gazebo/${colour_door}" selfCollide="false" gravityOff="false">
+</xacro:link_element_box> <!-- TODO had dampingFactor of 0.01 before maybe relevant-->
+
+<xacro:joint_element name="handle_axes" parent="door_link" child="handle_axes_link" 
+  x="0" y="${-(door_width-handle_dist_to_edge)}" z="${handle_height}" r="0" p="0" ya="0" 
+  type="revolute" x_ax="1" y_ax="0" z_ax="0" limit_low="${-handle_max_angle}" limit_up="0"
+  damping="0.1" friction="0.1" effort="10000000" velocity="10">
+</xacro:joint_element>
+
+<xacro:link_element_cylinder name="handle_axes" x="0" y="0" z="0" r="0" p="${M_PI/2}" ya="0" 
+  mass="1" radius="0.012" length="${door_thickness + 2*handle_dist_to_door}" ixx="1.0" iyy="1.0" izz="1.0"
+  mu1="1000" mu2="1000" material="Gazebo/${colour_handle}" selfCollide="false" gravityOff="false">
+</xacro:link_element_cylinder>
+
+<xacro:joint_element name="handle_element2" parent="handle_axes_link" child="handle_element2_link" 
+  x="-${door_thickness/2 + handle_dist_to_door}" y="0" z="0" r="${M_PI/2}" p="0" ya="0"
+  type="fixed" x_ax="0" y_ax="0" z_ax="0" limit_low="0" limit_up="0"
+  damping="0" friction="0" effort="0" velocity="0">
+</xacro:joint_element>
+
+<xacro:link_element_cylinder name="handle_element2" x="0" y="0" z="-0.055" r="0" p="0" ya="0" 
+  mass="1" radius="0.012" length="0.15" ixx="1.0" iyy="1.0" izz="1.0"
+  mu1="1000" mu2="1000" material="Gazebo/${colour_handle}" selfCollide="false" gravityOff="false">
+</xacro:link_element_cylinder>
+
+<xacro:joint_element name="handle_element3" parent="handle_element2_link" child="handle_element3_link" 
+  x="0" y="0" z="-0.12" r="0" p="${M_PI/2}" ya="0"
+  type="fixed" x_ax="0" y_ax="0" z_ax="0" limit_low="0" limit_up="0"
+  damping="0" friction="0" effort="0" velocity="0">
+</xacro:joint_element>
+
+<xacro:link_element_cylinder name="handle_element3" x="0" y="0" z="0.02" r="0" p="0" ya="0" 
+  mass="1" radius="0.012" length="0.03" ixx="1.0" iyy="1.0" izz="1.0"
+  mu1="1000" mu2="1000" material="Gazebo/${colour_handle}" selfCollide="false" gravityOff="false">
+</xacro:link_element_cylinder>
+
+<xacro:joint_element name="handle_element2_mirror" parent="handle_axes_link" child="handle_element2_mirror_link" 
+  x="${door_thickness/2 + handle_dist_to_door}" y="0" z="0" r="${M_PI/2}" p="0" ya="0"
+  type="fixed" x_ax="0" y_ax="0" z_ax="0" limit_low="0" limit_up="0"
+  damping="0" friction="0" effort="0" velocity="0">
+</xacro:joint_element>
+
+<xacro:link_element_cylinder name="handle_element2_mirror" x="0" y="0" z="-0.055" r="0" p="0" ya="0" 
+  mass="1" radius="0.012" length="0.15" ixx="1.0" iyy="1.0" izz="1.0"
+  mu1="1000" mu2="1000" material="Gazebo/${colour_handle}" selfCollide="false" gravityOff="false">
+</xacro:link_element_cylinder>
+
+<xacro:joint_element name="handle_element3_mirror" parent="handle_element2_mirror_link" child="handle_element3_mirror_link" 
+  x="0" y="0" z="-0.12" r="0" p="${M_PI/2}" ya="0"
+  type="fixed" x_ax="0" y_ax="0" z_ax="0" limit_low="0" limit_up="0"
+  damping="0" friction="0" effort="0" velocity="0">
+</xacro:joint_element>
+
+<xacro:link_element_cylinder name="handle_element3_mirror" x="0" y="0" z="-0.02" r="0" p="0" ya="0" 
+  mass="1" radius="0.012" length="0.03" ixx="1.0" iyy="1.0" izz="1.0"
+  mu1="1000" mu2="1000" material="Gazebo/${colour_handle}" selfCollide="false" gravityOff="false">
+</xacro:link_element_cylinder>
+
+<xacro:joint_element name="handle_axes_for_aruco" parent="door_link" child="aruco_code_link" 
+  x="0" y="${-(door_width-handle_dist_to_edge)}" z="${handle_height}" r="0" p="0" ya="0" 
+  type="fixed" x_ax="0" y_ax="0" z_ax="0" limit_low="0" limit_up="0"
+  damping="0" friction="0" effort="0" velocity="0">
+</xacro:joint_element>
+
+<xacro:link_element_box name="aruco_code" x="-${door_thickness/2 + 0.001}" y="0" z="-0.15" r="0" p="${-M_PI/2}" ya="0" 
+  mass="100" x_s="0.05" y_s="0.05" z_s="0.001" ixx="0.5" iyy="0.5" izz="0.5"
+  mu1="0" mu2="0" material="${aruco_no}" selfCollide="false" gravityOff="false">
+</xacro:link_element_box>
+
+<xacro:joint_element name="handle_axes_for_aruco_mirror" parent="door_link" child="aruco_code_mirror_link" 
+  x="0" y="${-(door_width-handle_dist_to_edge)}" z="${handle_height}" r="0" p="0" ya="0" 
+  type="fixed" x_ax="0" y_ax="0" z_ax="0" limit_low="0" limit_up="0"
+  damping="0" friction="0" effort="0" velocity="0">
+</xacro:joint_element>
+
+<xacro:link_element_box name="aruco_code_mirror" x="${door_thickness/2 + 0.001}" y="0" z="-0.15" r="0" p="${M_PI/2}" ya="0" 
+  mass="100" x_s="0.05" y_s="0.05" z_s="0.001" ixx="0.5" iyy="0.5" izz="0.5"
+  mu1="0" mu2="0" material="${aruco_no}" selfCollide="false" gravityOff="false">
+</xacro:link_element_box>
+
+
+<xacro:macro name="joint_transmission_and_interface" params="name_joint type hardwareInterface mechanicalReduction">
+  <transmission name="${name_joint}_trans">
+    <type>transmission_interface/${type}</type>
+    <joint name="${name_joint}">
+      <hardwareInterface>${hardwareInterface}</hardwareInterface>
+    </joint>
+      <actuator name="${name_joint}_motor">
+      <hardwareInterface>${hardwareInterface}</hardwareInterface>
+      <mechanicalReduction>${mechanicalReduction}</mechanicalReduction>
+    </actuator>
+  </transmission>
+</xacro:macro>
+
+<xacro:joint_transmission_and_interface name_joint="door_joint" type="SimpleTransmission" hardwareInterface="EffortJointInterface" mechanicalReduction="1"/>
+<xacro:joint_transmission_and_interface name_joint="handle_axes_joint" type="SimpleTransmission" hardwareInterface="EffortJointInterface" mechanicalReduction="1"/>
+
+
+  <!-- gazebo plugin for controlling the door-->
+<gazebo>
+  <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
+      <robotNamespace>/door_scaled1</robotNamespace>
+    <robotSimType>gazebo_ros_control/DefaultRobotHWSim</robotSimType>
+  </plugin>
+</gazebo>
+
+</robot>
